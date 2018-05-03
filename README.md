@@ -46,6 +46,8 @@ $model = Goods::create( /* опции */ );
 $options = (new App\Goods\TableName())
     ->setProvider(App\Constants::BOSH_MOTORS)
     ->setShopID(666);
+    
+$options->getTableName(); // goods_bosh_666
      
 // более короткая нотация через LaravelServiceContainer (класс App\Goods\GoodsServiceProvider)
 $options = app()->make(App\Goods\TableOption, [App\Constants::BOSH_MOTORS, 666]);
