@@ -42,7 +42,7 @@ $model = Goods::create( /* опции */ );
  * которое может ипользоваться как в AR, так и при составлении запросов через QueryBuilder
  */ 
 
-// или создание через оператор new
+// создание через оператор new
 $options = (new App\Goods\TableName())
     ->setProvider(App\Constants::BOSH_MOTORS)
     ->setShopID(666);
