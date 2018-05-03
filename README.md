@@ -32,20 +32,26 @@ $model->get(); // select * from `goods`, поскольку такой табл�
 $model = \Goods::model( app()->make(App\Goods\TableOption, [App\Constants::BOSH_MOTORS, $shopID]) );
 $model->get(); // select * from `goods_bosh_678`
 
-// Получение объекта AR. Bспользует механизм Laravel Facede (файл App\Goods\GoodsFactory)
+// Получение объекта AR. Использует механизм Laravel Facede (класс App\Goods\GoodsFactory)
 $model = Goods::model( /* опции */ );
 // создать таблицу и вернуть объект AR
 $model = Goods::create( /* опции */ );
 
 /**
  * Отдельный класс TableOptions хранит параметры таблицы, и также генерирует название таблицы
- * которое может ипользоваться как в AR, так и при составлении запросы через QueryBuilder
+ * которое может ипользоваться как в AR, так и при составлении запросов через QueryBuilder
  */ 
 
-// опции таблицы
+// или создание через оператор new
+$options = (new App\Goods\TableName())
+    ->setProvider(App\Constants::BOSH_MOTORS)
+    ->setShopID(666);
+     
+// более короткая нотация через LaravelServiceContainer (класс App\Goods\GoodsServiceProvider)
 $options = app()->make(App\Goods\TableOption, [App\Constants::BOSH_MOTORS, 666]);
 $options->getTableName(); // goods_bosh_666
 
+// известно название таблицы, необходимо получить параметры
 $options = new App\Goods\TableOptions('goods_bosh_333');
 $options->getProvider(); // bosh
 $options->getShopID(); // 333
